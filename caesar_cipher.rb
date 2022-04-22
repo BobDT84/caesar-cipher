@@ -4,6 +4,10 @@ def caesar_cipher(message,shift)
     end
 
     bytes_message = message.bytes.map do |byte|
+        if !(65..90).include?(byte) && !(97..122).include?(byte)
+            #ignore anything that is not A-Z or a-z
+            next byte
+        end
         shifted_byte = byte + shift
         if cipher_wraps?(byte, shifted_byte)
             shifted_byte = shifted_byte - 26
@@ -32,3 +36,5 @@ p caesar_cipher('A',52) #=> "A"
 p caesar_cipher('Z',8) #=> "H"
 p caesar_cipher('A',-77) #=> "B"
 p caesar_cipher('A',27) #=> "B"
+p caesar_cipher('Hello, World!',1) #=> "Ifmmp, Xpsme!"
+p caesar_cipher('Ifmmp, Xpsme!',-1) #=> "Hello, World!"
