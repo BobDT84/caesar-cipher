@@ -1,6 +1,6 @@
 def caesar_cipher(message,shift)
-    until shift > 0 && shift < 26
-        shift < 0 ? shift += 26 : shift -= 26
+    unless shift > 0 && shift < 26
+        shift = shift % 26
     end
 
     bytes_message = message.bytes.map do |byte|
@@ -28,4 +28,7 @@ end
 
 
 p caesar_cipher('abcDEFGhijklmnopqrstuvwxyz',2)
-p caesar_cipher('A',8)
+p caesar_cipher('A',52)
+p caesar_cipher('Z',8)
+p caesar_cipher('A',-77)
+p caesar_cipher('A',27)
