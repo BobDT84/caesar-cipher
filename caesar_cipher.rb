@@ -27,8 +27,8 @@ end
 
 
 
-p caesar_cipher('abcDEFGhijklmnopqrstuvwxyz',2)
-p caesar_cipher('A',52)
-p caesar_cipher('Z',8)
-p caesar_cipher('A',-77)
-p caesar_cipher('A',27)
+p caesar_cipher('abcDEFGhijklmnopqrstuvwxyz',2) #=> "cdeFGHIjklmnopqrstuvwxyzab"
+p caesar_cipher('A',52) #=> "A"
+p caesar_cipher('Z',8) #=> "H"
+p caesar_cipher('A',-77) #=> "B"
+p caesar_cipher('A',27) #=> "B"
