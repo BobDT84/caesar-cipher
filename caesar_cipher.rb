@@ -4,37 +4,28 @@ def caesar_cipher(message,shift)
     end
 
     bytes_message = message.bytes.map do |byte|
-        new_byte = byte + shift
-        upcase_bytes = (65..90)
-        downcase_bytes = (97..122)
-        case true
-        when upcase_bytes.include?(byte)
-            case true
-            when upcase_bytes.include?(new_byte)
-                new_byte
-            when new_byte > 90
-                new_byte - 26
-            when new_byte < 65
-                new_byte + 26
-            end
-        when downcase_bytes.include?(byte)
-            case true
-            when downcase_bytes.include?(new_byte)
-                new_byte
-            when new_byte > 122
-                new_byte - 26
-            when new_byte < 97
-                new_byte + 26
-            end
-        else
-            puts "#{byte} is not a correct letter"
-            p new_byte
-            p byte
+        shifted_byte = byte + shift
+        if cipher_wraps?(byte, shifted_byte)
+            shifted_byte = shifted_byte - 26
         end
+        shifted_byte
     end
     bytes_message.pack('c*')
 end
 
+def cipher_wraps?(byte, shifted_byte)
+    upcase_bytes = (65..90)
+    downcase_bytes = (97..122)
+    if upcase_bytes.include?(byte) && upcase_bytes.include?(shifted_byte)
+        return false
+    elsif downcase_bytes.include?(byte) && downcase_bytes.include?(shifted_byte)
+        return false
+    else
+        return true
+    end
+end
 
-p caesar_cipher('abcDEFGhijklmnopqrstuv',2)
+
+
+p caesar_cipher('abcDEFGhijklmnopqrstuvwxyz',2)
 p caesar_cipher('A',8)
